@@ -1,0 +1,19 @@
+name: Tribes
+main: com.tribes.cometcraft.main.Main
+version: 0.1
+author: CometCraft
+description: CometCraft plugin
+commands:
+    tribes:
+        description: Join a tribe
+        usage: /join
+        permission: tribes.tribes
+        permission-message: Not enough permissions!
+permissions:
+    tribes.*:
+        description: Gives access to all commands!
+        children:
+            tribes.tribes: true
+    tribes.tribes:
+        description: Permission to join a tribe
+        default: op
