@@ -1,5 +1,8 @@
 package com.tribes.cometcraft.teams;
 
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,58 +29,61 @@ public class JoinCommand implements CommandExecutor{
 		}
 		if(args.length > 0){
 			if(args[0].equalsIgnoreCase("join")){
-				if(args[1].equalsIgnoreCase("fire")){
+				if(args[1].equalsIgnoreCase("fire")){	
 					removeFromTeams(p);
-					teams.Fire.add(p);
+					teams.Fire.add(p.getUniqueId().toString());
 					sendGreenMessage(p, "You joined the Fire tribe!");
 				}
 				if(args[1].equalsIgnoreCase("water")){
 					removeFromTeams(p);
-					teams.Water.add(p);
+					teams.Water.add(p.getUniqueId().toString());
 					sendGreenMessage(p, "You joined the Water tribe!");
 				}
 				if(args[1].equalsIgnoreCase("earth")){
 					removeFromTeams(p);
-					teams.Earth.add(p);
+					teams.Earth.add(p.getUniqueId().toString());
 					sendGreenMessage(p, "You joined the Earth tribe!");
 				}
 				if(args[1].equalsIgnoreCase("air")){
 					removeFromTeams(p);
-					teams.Air.add(p);
+					teams.Air.add(p.getUniqueId().toString());
 					sendGreenMessage(p, "You joined the Air tribe!");
+				}
+				if(args[1] == null){
+					sendRedMessage(p, "Define a tribe!");
 				}
 		    }
 			if(args[0].equalsIgnoreCase("team")){
 				if(args[1].equalsIgnoreCase("fire")){
 					sendBlueMessage(p, "The Fire Team:");
-					for (Player s : teams.Fire)
+					for (String s : teams.Fire)
 					{
-					    
-					   sendGreenMessage(p, s.getName().toString());
+					   UUID uid = UUID.fromString(s);
+					   sendGreenMessage(p, Bukkit.getServer().getPlayer(uid).getName());
 					}
 				}
 				if(args[1].equalsIgnoreCase("water")){
 					sendBlueMessage(p, "The Water Team:");
-					for (Player s : teams.Water)
+					for (String s : teams.Water)
 					{
-					    
-					    sendGreenMessage(p, s.getName().toString());
+						   UUID uid = UUID.fromString(s);
+						   sendGreenMessage(p, Bukkit.getServer().getPlayer(uid).getName());
 					}
 				}
 				if(args[1].equalsIgnoreCase("earth")){
 					sendBlueMessage(p, "The Earth Team:");
-					for (Player s : teams.Earth)
+					for (String s : teams.Earth)
 					{
-					    
-					    sendGreenMessage(p, s.getName().toString());
+						   UUID uid = UUID.fromString(s);
+						   sendGreenMessage(p, Bukkit.getServer().getPlayer(uid).getName());
 					}
 				}
 				if(args[1].equalsIgnoreCase("air")){
 					sendBlueMessage(p, "The Air Team:");
-					for (Player s : teams.Air)
+					for (String s : teams.Air)
 					{
-					   
-					    sendGreenMessage(p, s.getName().toString());
+						   UUID uid = UUID.fromString(s);
+						   sendGreenMessage(p, Bukkit.getServer().getPlayer(uid).getName());
 					}
 				}
 			
@@ -102,10 +108,10 @@ public class JoinCommand implements CommandExecutor{
 	}
 	
 	public void removeFromTeams(Player p){
-		teams.Fire.remove(p);
-		teams.Water.remove(p);
-		teams.Earth.remove(p);
-		teams.Air.remove(p);
+		teams.Fire.remove(p.getUniqueId().toString());
+		teams.Water.remove(p.getUniqueId().toString());
+		teams.Earth.remove(p.getUniqueId().toString());
+		teams.Air.remove(p.getUniqueId().toString());
 	}
 
 }
